@@ -17,12 +17,24 @@ enum ComparatorType {
     CT_LESS_EQUAL = 6;
 }
 
+enum VariantType {
+    VT_INTEGER = 0;
+    VT_DOUBLE = 1;
+    VT_STRING = 3;
+}
+
+message ValueTransferRule {
+    required string regex = 1;
+    optional VariantType cast_type = 2;
+}
+
 message SingleColumnValueFilter {
     required ComparatorType comparator = 1;
     required string column_name = 2;
     required bytes column_value = 3;
     required bool filter_if_missing = 4;
     required bool latest_version_only = 5; 
+    optional ValueTransferRule value_transfer_rule = 6;
 }
 
 enum LogicalOperator {
